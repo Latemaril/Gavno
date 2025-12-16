@@ -1,0 +1,663 @@
+{
+  "metadata": {
+    "version": "5.0",
+    "title": "Дерево клинических решений при переломах лодыжек",
+    "subtitle": "Полная система поддержки принятия диагностических и лечебных решений для взрослых и детей",
+    "source_document": "Клинические рекомендации. Переломы лодыжек",
+    "year": 2024,
+    "language": "ru",
+    "encoding": "UTF-8",
+    "description": "Детальное интерактивное дерево решений для диагностики и лечения переломов лодыжек",
+    "format": "JSON",
+    "structure_type": "hierarchical_tree_comprehensive"
+  },
+  "root": {
+    "id": "root",
+    "type": "decision_node",
+    "question": "Пациент поступил с подозрением на перелом лодыжек. Каков характер травмы?",
+    "source_reference": "Раздел 2.1, с. 18",
+    "clinical_info": {
+      "objective": "Определение механизма и тяжести травмы для выбора алгоритма диагностики и лечения",
+      "evidence": "C"
+    },
+    "answers": [
+      {
+        "text": "Низкоэнергетическая травма (подворачивание стопы, падение с высоты собственного роста)",
+        "next_node_id": "low_energy_trauma_assessment"
+      },
+      {
+        "text": "Высокоэнергетическая травма (ДТП, падение с высоты)",
+        "next_node_id": "high_energy_trauma_assessment"
+      },
+      {
+        "text": "Открытый перелом",
+        "next_node_id": "open_fracture_management"
+      },
+      {
+        "text": "Повреждение с подозрением на вывих/подвывих стопы",
+        "next_node_id": "dislocation_assessment"
+      }
+    ]
+  },
+  "nodes": {
+    "low_energy_trauma_assessment": {
+      "id": "low_energy_trauma_assessment",
+      "type": "assessment_node",
+      "question": "Каков характер перелома при низкоэнергетической травме?",
+      "source_reference": "Раздел 1.3, с. 10-11",
+      "clinical_info": {
+        "objective": "Классификация перелома по типу AO/ASIF для определения тактики лечения",
+        "evidence": "C"
+      },
+      "options": [
+        {
+          "text": "Тип А (подсиндесмозный перелом)",
+          "next_node_id": "type_a_fracture"
+        },
+        {
+          "text": "Тип В (чрезсиндесмозный перелом)",
+          "next_node_id": "type_b_fracture"
+        },
+        {
+          "text": "Тип С (надсиндесмозный перелом)",
+          "next_node_id": "type_c_fracture"
+        }
+      ]
+    },
+    "high_energy_trauma_assessment": {
+      "id": "high_energy_trauma_assessment",
+      "type": "assessment_node",
+      "question": "Каков характер перелома при высокоэнергетической травме?",
+      "source_reference": "Раздел 1.3, с. 10-11",
+      "clinical_info": {
+        "objective": "Определение степени тяжести повреждения для выбора тактики лечения",
+        "evidence": "C"
+      },
+      "options": [
+        {
+          "text": "Перелом со смещением отломков",
+          "next_node_id": "displaced_fracture_management"
+        },
+        {
+          "text": "Нестабильный переломовывих голеностопного сустава",
+          "next_node_id": "unstable_dislocation"
+        },
+        {
+          "text": "Множественные переломы костей голени",
+          "next_node_id": "multiple_fractures_management"
+        },
+        {
+          "text": "Перелом с повреждением ДМБС",
+          "next_node_id": "dmbs_injury"
+        }
+      ]
+    },
+    "open_fracture_management": {
+      "id": "open_fracture_management",
+      "type": "assessment_node",
+      "question": "Какова степень открытого перелома по классификации Gustilo-Anderson?",
+      "source_reference": "Раздел 1.5, с. 14-15",
+      "clinical_info": {
+        "objective": "Классификация открытого перелома для определения тактики лечения",
+        "evidence": "C"
+      },
+      "options": [
+        {
+          "text": "Тип I (рана менее 1 см)",
+          "next_node_id": "open_type_1_management"
+        },
+        {
+          "text": "Тип II (рана 1-10 см)",
+          "next_node_id": "open_type_2_management"
+        },
+        {
+          "text": "Тип IIIA (обширное повреждение, покровы сохранны)",
+          "next_node_id": "open_type_3a_management"
+        },
+        {
+          "text": "Тип IIIB (обширное повреждение с дефектами)",
+          "next_node_id": "open_type_3b_management"
+        },
+        {
+          "text": "Тип IIIC (повреждение сосудов)",
+          "next_node_id": "open_type_3c_management"
+        }
+      ]
+    },
+    "open_type_1_management": {
+      "id": "open_type_1_management",
+      "type": "treatment_node",
+      "question": "Лечение открытого перелома лодыжек типа I",
+      "source_reference": "Раздел 3.2, с. 30-35",
+      "clinical_info": {
+        "objective": "Хирургическая обработка и остеосинтез открытого перелома",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Первичная хирургическая обработка",
+          "surgical_method": "Дебридмент раны, промывание физраствором",
+          "detailed_description": "Выполняется первичная хирургическая обработка раны с удалением нежизнеспособных тканей и промыванием большим количеством физраствора."
+        },
+        {
+          "type": "Антибактериальная терапия",
+          "surgical_method": "Цефазолин 2г в/в",
+          "detailed_description": "Антибиотикопрофилактика начинается как можно скорее после травмы и продолжается в течение 24-72 часов."
+        },
+        {
+          "type": "Остеосинтез",
+          "surgical_method": "Открытая репозиция и внутренняя фиксация",
+          "detailed_description": "После обработки раны выполняется остеосинтез перелома лодыжек с использованием пластин и винтов."
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к послеоперационной реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "open_type_2_management": {
+      "id": "open_type_2_management",
+      "type": "treatment_node",
+      "question": "Лечение открытого перелома лодыжек типа II",
+      "source_reference": "Раздел 3.2, с. 30-35",
+      "clinical_info": {
+        "objective": "Расширенная хирургическая обработка и остеосинтез",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Расширенная хирургическая обработка",
+          "surgical_method": "Тщательный дебридмент, удаление нежизнеспособных тканей",
+          "detailed_description": "Проводится более тщательная обработка раны с удалением всех нежизнеспособных тканей."
+        },
+        {
+          "type": "Антибактериальная терапия",
+          "surgical_method": "Цефазолин 2г + гентамицин 6мг/кг",
+          "detailed_description": "Расширенная антибиотикотерапия для профилактики инфекционных осложнений."
+        },
+        {
+          "type": "Остеосинтез",
+          "surgical_method": "ОРВФ или временная внешняя фиксация",
+          "detailed_description": "В зависимости от состояния мягких тканей выполняется окончательный остеосинтез или временная фиксация аппаратом внешней фиксации."
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к послеоперационной реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "open_type_3a_management": {
+      "id": "open_type_3a_management",
+      "type": "treatment_node",
+      "question": "Лечение открытого перелома лодыжек типа IIIA",
+      "source_reference": "Раздел 3.2, с. 30-35",
+      "clinical_info": {
+        "objective": "Этапное лечение с возможной пластикой",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Первый этап",
+          "surgical_method": "Дебридмент, временная внешняя фиксация",
+          "detailed_description": "На первом этапе выполняется хирургическая обработка и временная стабилизация аппаратом внешней фиксации."
+        },
+        {
+          "type": "Второй этап",
+          "surgical_method": "Окончательный остеосинтез после стабилизации мягких тканей",
+          "detailed_description": "После заживления мягких тканей (7-14 дней) выполняется окончательный остеосинтез."
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к послеоперационной реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "open_type_3b_management": {
+      "id": "open_type_3b_management",
+      "type": "treatment_node",
+      "question": "Лечение открытого перелома лодыжек типа IIIB",
+      "source_reference": "Раздел 3.2, с. 30-35",
+      "clinical_info": {
+        "objective": "Многоэтапное лечение с пластикой дефектов",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Первый этап",
+          "surgical_method": "Дебридмент, внешняя фиксация",
+          "detailed_description": "Хирургическая обработка раны с иссечением нежизнеспособных тканей и временная стабилизация."
+        },
+        {
+          "type": "Второй этап",
+          "surgical_method": "Пластика дефектов мягких тканей (местными тканями или свободным лоскутом)",
+          "detailed_description": "Закрытие дефектов мягких тканей для создания условий для остеосинтеза."
+        },
+        {
+          "type": "Третий этап",
+          "surgical_method": "Окончательный остеосинтез",
+          "detailed_description": "После заживления мягких тканей выполняется окончательная фиксация перелома."
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к послеоперационной реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "open_type_3c_management": {
+      "id": "open_type_3c_management",
+      "type": "treatment_node",
+      "question": "Лечение открытого перелома лодыжек типа IIIC с повреждением сосудов",
+      "source_reference": "Раздел 3.2, с. 30-35",
+      "clinical_info": {
+        "objective": "Экстренная сосудистая реконструкция и стабилизация перелома",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Экстренная помощь",
+          "surgical_method": "Восстановление кровотока (сосудистый шов, шунтирование)",
+          "detailed_description": "Первоочередная задача - восстановление кровоснабжения конечности в течение 6 часов для предотвращения ишемии."
+        },
+        {
+          "type": "Стабилизация перелома",
+          "surgical_method": "Внешняя фиксация для защиты сосудистого анастомоза",
+          "detailed_description": "Выполняется временная фиксация аппаратом внешней фиксации для стабилизации перелома и защиты сосудистой реконструкции."
+        },
+        {
+          "type": "Дальнейшее лечение",
+          "surgical_method": "Этапное лечение с возможной конверсией в окончательный остеосинтез",
+          "detailed_description": "После стабилизации состояния и заживления сосудов рассматривается вопрос об окончательном остеосинтезе."
+        }
+      ],
+      "critical_rules": [
+        {
+          "rule": "Время ишемии",
+          "warning": "Критическое время тепловой ишемии конечности составляет 6 часов. После этого резко возрастает риск ампутации."
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к интенсивному наблюдению",
+          "next_node_id": "intensive_monitoring"
+        }
+      ]
+    },
+    "intensive_monitoring": {
+      "id": "intensive_monitoring",
+      "type": "management_node",
+      "question": "Интенсивное наблюдение после сосудистой реконструкции",
+      "source_reference": "Раздел 4, с. 45-50",
+      "clinical_info": {
+        "objective": "Мониторинг жизнеспособности конечности",
+        "evidence": "A"
+      },
+      "prevention_measures": [
+        {
+          "measure": "Контроль кровоснабжения",
+          "implementation": "Оценка пульсации, температуры, цвета кожи каждые 2 часа"
+        },
+        {
+          "measure": "Допплерография",
+          "implementation": "Ежедневный ультразвуковой контроль сосудистого кровотока"
+        },
+        {
+          "measure": "Профилактика тромбоза",
+          "implementation": "Антикоагулянтная терапия под контролем коагулограммы"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "type_a_fracture": {
+      "id": "type_a_fracture",
+      "type": "assessment_node",
+      "question": "Какой подтип перелома типа А?",
+      "source_reference": "Раздел 1.5, с. 11-12",
+      "clinical_info": {
+        "objective": "Детальная классификация перелома",
+        "evidence": "C"
+      },
+      "options": [
+        {
+          "text": "44-А1 - изолированный подсиндесмозный перелом малоберцовой кости",
+          "next_node_id": "stable_type_a1"
+        },
+        {
+          "text": "44-А2 - подсиндесмозный перелом с переломом медиальной лодыжки",
+          "next_node_id": "type_a2_treatment"
+        },
+        {
+          "text": "44-А3 - подсиндесмозный перелом с дорзомедиальным переломом",
+          "next_node_id": "type_a3_treatment"
+        }
+      ]
+    },
+    "type_b_fracture": {
+      "id": "type_b_fracture",
+      "type": "treatment_node",
+      "question": "Лечение чрезсиндесмозного перелома типа В",
+      "source_reference": "Раздел 3.1-3.2, с. 25-35",
+      "clinical_info": {
+        "objective": "Выбор тактики лечения для чрезсиндесмозного перелома",
+        "evidence": "B"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Оценка стабильности",
+          "surgical_method": "Стресс-тесты под рентгеном",
+          "detailed_description": "Проводится оценка стабильности синдесмоза с помощью стресс-тестов"
+        },
+        {
+          "type": "Лечение стабильных переломов",
+          "surgical_method": "Консервативное лечение с иммобилизацией",
+          "detailed_description": "При стабильном переломе возможно консервативное лечение"
+        },
+        {
+          "type": "Лечение нестабильных переломов",
+          "surgical_method": "ОРВФ с фиксацией синдесмоза",
+          "detailed_description": "При нестабильности показано оперативное лечение с фиксацией синдесмоза"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_conservative"
+        }
+      ]
+    },
+    "type_c_fracture": {
+      "id": "type_c_fracture",
+      "type": "treatment_node",
+      "question": "Лечение надсиндесмозного перелома типа С",
+      "source_reference": "Раздел 3.2, с. 28-35",
+      "clinical_info": {
+        "objective": "Оперативное лечение нестабильного перелома",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Тактика лечения",
+          "surgical_method": "Оперативное лечение показано в большинстве случаев",
+          "detailed_description": "Надсиндесмозные переломы типа С обычно нестабильны и требуют оперативного лечения"
+        },
+        {
+          "type": "Методика остеосинтеза",
+          "surgical_method": "ОРВФ с фиксацией малоберцовой кости пластиной, синдесмоза винтом",
+          "detailed_description": "Выполняется остеосинтез малоберцовой кости пластиной и винтами, при необходимости - фиксация синдесмоза позиционным винтом"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к послеоперационной реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "stable_type_a1": {
+      "id": "stable_type_a1",
+      "type": "treatment_node",
+      "question": "Лечение стабильного изолированного подсиндесмозного перелома малоберцовой кости (тип А1)",
+      "source_reference": "Раздел 3.1, с. 25-27",
+      "clinical_info": {
+        "objective": "Консервативное лечение стабильного перелома",
+        "evidence": "C"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Иммобилизация",
+          "surgical_method": "U-образная гипсовая лангета",
+          "detailed_description": "При стабильном переломе показана иммобилизация U-образной гипсовой лангетой на 6-8 недель"
+        },
+        {
+          "type": "Режим нагрузки",
+          "weight_bearing": "Частичная нагрузка через 3-4 недели",
+          "progression": "Полная нагрузка после подтверждения консолидации",
+          "detailed_description": "Постепенное увеличение нагрузки под контролем рентгенографии"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_conservative"
+        }
+      ]
+    },
+    "type_a2_treatment": {
+      "id": "type_a2_treatment",
+      "type": "treatment_node",
+      "question": "Лечение подсиндесмозного перелома с переломом медиальной лодыжки (А2)",
+      "source_reference": "Раздел 3.2, с. 28-32",
+      "clinical_info": {
+        "objective": "Оперативное лечение двухлодыжечного перелома",
+        "evidence": "B"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Методика остеосинтеза",
+          "surgical_method": "Остеосинтез обеих лодыжек",
+          "detailed_description": "Выполняется фиксация малоберцовой кости пластиной, медиальной лодыжки - винтами"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "type_a3_treatment": {
+      "id": "type_a3_treatment",
+      "type": "treatment_node",
+      "question": "Лечение подсиндесмозного перелома с дорзомедиальным переломом (А3)",
+      "source_reference": "Раздел 3.2, с. 28-32",
+      "clinical_info": {
+        "objective": "Оперативное лечение сложного перелома",
+        "evidence": "B"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Методика остеосинтеза",
+          "surgical_method": "Комплексный остеосинтез всех компонентов перелома",
+          "detailed_description": "Выполняется фиксация всех фрагментов перелома с восстановлением анатомии голеностопного сустава"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "displaced_fracture_management": {
+      "id": "displaced_fracture_management",
+      "type": "treatment_node",
+      "question": "Лечение перелома со смещением",
+      "source_reference": "Раздел 3.2, с. 28-35",
+      "clinical_info": {
+        "objective": "Оперативная репозиция и фиксация",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Методика",
+          "surgical_method": "ОРВФ с анатомической репозицией",
+          "detailed_description": "Открытая репозиция и внутренняя фиксация для восстановления анатомии сустава"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "unstable_dislocation": {
+      "id": "unstable_dislocation",
+      "type": "treatment_node",
+      "question": "Лечение нестабильного переломовывиха",
+      "source_reference": "Раздел 3.2, с. 28-35",
+      "clinical_info": {
+        "objective": "Экстренная репозиция и стабилизация",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Первый этап",
+          "surgical_method": "Закрытая или открытая репозиция вывиха",
+          "detailed_description": "Экстренное устранение вывиха для предотвращения ишемии и повреждения мягких тканей"
+        },
+        {
+          "type": "Второй этап",
+          "surgical_method": "Остеосинтез после стабилизации",
+          "detailed_description": "После репозиции выполняется остеосинтез перелома"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "multiple_fractures_management": {
+      "id": "multiple_fractures_management",
+      "type": "treatment_node",
+      "question": "Лечение множественных переломов",
+      "source_reference": "Раздел 3.2, с. 28-35",
+      "clinical_info": {
+        "objective": "Комплексный остеосинтез",
+        "evidence": "B"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Методика",
+          "surgical_method": "Этапный или одномоментный остеосинтез",
+          "detailed_description": "Выбор тактики зависит от состояния пациента и характера переломов"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "dmbs_injury": {
+      "id": "dmbs_injury",
+      "type": "treatment_node",
+      "question": "Лечение перелома с повреждением дистального межберцового синдесмоза",
+      "source_reference": "Раздел 3.2, с. 28-35",
+      "clinical_info": {
+        "objective": "Восстановление синдесмоза",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Методика",
+          "surgical_method": "Остеосинтез с фиксацией синдесмоза позиционным винтом",
+          "detailed_description": "Восстановление анатомии синдесмоза критично для долгосрочного результата"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_surgical"
+        }
+      ]
+    },
+    "dislocation_assessment": {
+      "id": "dislocation_assessment",
+      "type": "treatment_node",
+      "question": "Лечение вывиха/подвывиха стопы",
+      "source_reference": "Раздел 3.1-3.2, с. 25-35",
+      "clinical_info": {
+        "objective": "Экстренная репозиция",
+        "evidence": "A"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Методика",
+          "surgical_method": "Закрытая или открытая репозиция",
+          "detailed_description": "Экстренное устранение вывиха с последующей оценкой стабильности и необходимости остеосинтеза"
+        }
+      ],
+      "answers": [
+        {
+          "text": "Перейти к реабилитации",
+          "next_node_id": "rehabilitation_conservative"
+        }
+      ]
+    },
+    "rehabilitation_conservative": {
+      "id": "rehabilitation_conservative",
+      "type": "management_node",
+      "question": "Реабилитация после консервативного лечения",
+      "source_reference": "Раздел 4, с. 40-45",
+      "clinical_info": {
+        "objective": "Восстановление функции голеностопного сустава",
+        "evidence": "B"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Ранняя фаза",
+          "rehabilitation": "ЛФК в гипсе, изометрические упражнения",
+          "detailed_description": "Начинается с первых дней после иммобилизации"
+        },
+        {
+          "type": "Поздняя фаза",
+          "rehabilitation": "Восстановление подвижности, силы, проприоцепции",
+          "detailed_description": "После снятия гипса - активная реабилитация"
+        }
+      ],
+      "key_recommendations": [
+        "Регулярные упражнения для восстановления амплитуды движений",
+        "Укрепление мышц голени и стопы",
+        "Тренировка баланса и проприоцепции",
+        "Постепенное возвращение к физической активности"
+      ]
+    },
+    "rehabilitation_surgical": {
+      "id": "rehabilitation_surgical",
+      "type": "management_node",
+      "question": "Реабилитация после оперативного лечения",
+      "source_reference": "Раздел 4, с. 40-45",
+      "clinical_info": {
+        "objective": "Восстановление функции после остеосинтеза",
+        "evidence": "B"
+      },
+      "treatment_protocols": [
+        {
+          "type": "Ранняя фаза (0-6 недель)",
+          "rehabilitation": "Дозированная нагрузка, ЛФК",
+          "weight_bearing": "Частичная нагрузка с костылями",
+          "detailed_description": "Постепенное увеличение нагрузки под контролем боли"
+        },
+        {
+          "type": "Поздняя фаза (6-12 недель)",
+          "rehabilitation": "Полная реабилитация",
+          "weight_bearing": "Полная нагрузка",
+          "detailed_description": "Активная реабилитация с возвращением к нормальной активности"
+        }
+      ],
+      "key_recommendations": [
+        "Ранняя мобилизация голеностопного сустава",
+        "Профилактика тромбоэмболических осложнений",
+        "Укрепление мышц нижней конечности",
+        "Коррекция походки и биомеханики",
+        "Контрольные рентгенограммы через 6 и 12 недель"
+      ]
+    }
+  }
+}
