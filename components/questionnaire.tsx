@@ -217,9 +217,15 @@ export default function Questionnaire({
   const isTerminalNode = (node: Node): boolean => {
     if (!node) return false
 
-    const hasNoNextNodes =
-      (!node.answers || node.answers.length === 0) && (!node.options || !node.options.some((o) => o.next_node_id))
+    // Если есть answers или options с next_node_id - узел НЕ терминальный, продолжаем опрос
+    const hasNextOptions = node.answers && node.answers.length > 0
+    const hasNextFromOptions = node.options && node.options.some((o) => o.next_node_id)
 
+    if (hasNextOptions || hasNextFromOptions) {
+      return false
+    }
+
+    // Если нет способов продолжить И есть рекомендации - это терминальный узел
     const hasRecommendations =
       (node.recommendations && node.recommendations.length > 0) ||
       (node.key_recommendations && node.key_recommendations.length > 0) ||
@@ -228,7 +234,7 @@ export default function Questionnaire({
       (node.therapeutic_measures && node.therapeutic_measures.length > 0) ||
       (node.prevention_measures && node.prevention_measures.length > 0)
 
-    return hasNoNextNodes || (hasRecommendations && (node.type === "summary_node" || node.type === "treatment_node"))
+    return hasRecommendations
   }
 
   if (isLoading) {
@@ -277,6 +283,8 @@ export default function Questionnaire({
   }
 
   const handleAnswer = (answer: Answer | Option, isOption = false) => {
+    console.log("[v0] handleAnswer called with:", { answer, isOption, currentNode: currentNodeId })
+
     // Формирование строки с клинической информацией
     let clinicalInfoStr = ""
     if (currentNode.clinical_info) {
@@ -303,15 +311,20 @@ export default function Questionnaire({
     const updatedLog = [...log, newLogEntry]
     setLog(updatedLog)
 
-    // Если это option без next_node_id - просто записываем информацию
-    if (isOption && !answer.next_node_id) {
+    if (!answer.next_node_id) {
+      console.log("[v0] No next_node_id found, checking if terminal node")
+      // Если нет next_node_id - проверяем терминальность текущего узла
+      if (isTerminalNode(currentNode)) {
+        const collectedRecs = collectAllRecommendations(currentNode)
+        console.log("[v0] Terminal node without next_node_id. Recommendations:", collectedRecs)
+        if (collectedRecs.length > 0) {
+          setRecommendations(collectedRecs)
+        }
+      }
       return
     }
 
-    if (!answer.next_node_id) {
-      console.log("[v0] No next_node_id found, staying on current node")
-      return
-    }
+    console.log("[v0] Moving to next node:", answer.next_node_id)
 
     const updatedHistory = [...history, answer.next_node_id]
     setHistory(updatedHistory)
@@ -326,7 +339,16 @@ export default function Questionnaire({
       return
     }
 
-    console.log("[v0] Moving to node:", nextNode.id, "Type:", nextNode.type)
+    console.log(
+      "[v0] Next node found:",
+      nextNode.id,
+      "Type:",
+      nextNode.type,
+      "Has answers:",
+      !!nextNode.answers,
+      "Has options:",
+      !!nextNode.options,
+    )
 
     if (isTerminalNode(nextNode)) {
       const collectedRecs = collectAllRecommendations(nextNode)
@@ -338,6 +360,7 @@ export default function Questionnaire({
         setRecommendations([{ type: "info", text: "Диагностика завершена. Рекомендации не найдены." }])
       }
     } else {
+      console.log("[v0] Not a terminal node, continuing to:", answer.next_node_id)
       setCurrentNodeId(answer.next_node_id)
     }
   }
